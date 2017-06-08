@@ -29,6 +29,7 @@ Oracle Application Container Cloud Service のキャッシュ機能は簡単に�
   - あるキャッシュが壊れてしまったとしても、別のキャッシュからの自動復旧が可能
 - キャッシュ・サービスの再起動時もデータは保存
 - スケーラブルな構成
+- [ローカルキャッシュ](./README_LocalCache.md)
 
 ## 前提
 

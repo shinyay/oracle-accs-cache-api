@@ -1,9 +1,7 @@
 package com.oracle.jp.shinyay.cache.servlet;
 
 
-import com.oracle.cloud.cache.basic.Cache;
-import com.oracle.cloud.cache.basic.RemoteSessionProvider;
-import com.oracle.cloud.cache.basic.Session;
+import com.oracle.cloud.cache.basic.*;
 import com.oracle.cloud.cache.basic.options.Transport;
 import com.oracle.cloud.cache.basic.options.ValueType;
 
@@ -20,8 +18,8 @@ import java.util.Optional;
 
 public class CacheServlet extends HttpServlet {
 
-    private HttpSession session ;
     private static final String VISITED = "visited";
+    private static final String APP_HOME_DIR = "APP_HOME";
     private static final String CCS_ENV_NAME = "CACHING_INTERNAL_CACHE_URL";
     private static final String CACHE_HOST = System.getenv(CCS_ENV_NAME);
     private static final String CACHE_PORT = "8080";
@@ -30,9 +28,12 @@ public class CacheServlet extends HttpServlet {
 
     private static Session cacheSession;
     private static Cache cache;
+    private static SessionProvider sessionProvider;
+
 
     static {
-        cacheSession = new RemoteSessionProvider(CACHE_URL).createSession(Transport.rest());
+        sessionProvider = System.getenv(APP_HOME_DIR) == null ? new LocalSessionProvider() : new RemoteSessionProvider(CACHE_URL);
+        cacheSession = sessionProvider.createSession(Transport.rest());
         cache = cacheSession.getCache(CACHE_NAME, ValueType.of(String.class));
     }
 

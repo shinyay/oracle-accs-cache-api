@@ -259,7 +259,7 @@ Cache cache = cacheSession.getCache(CACHE_NAME, ValueType.of(String.class));
 
 ![](images/accs-cache_23.png)
 
-各アプリケーションのアクセス数を共有してそれぞれカウントあアップしていきます。
+各アプリケーションのアクセス数を共有してそれぞれカウントアップしていきます。
 
 ## Licence
 
